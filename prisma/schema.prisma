@@ -1,0 +1,23 @@
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+
+model Musicas {
+  id       Int      @id @default(autoincrement()) 
+  name     String   
+  grade    Int      
+  artistId Int     
+  artist   Artista  @relation(fields: [artistId], references: [id]) 
+}
+
+model Artista {
+  id      Int      @id @default(autoincrement()) 
+  name    String   
+  musicas Musica[] 
+}
